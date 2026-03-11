@@ -1,0 +1,33 @@
+apiVersion: apps.kommander.d2iq.io/v1alpha3
+kind: AppDeployment
+metadata:
+  name: kiali
+  namespace: kommander-default-workspace
+spec:
+  appRef:
+    kind: ClusterApp
+    name: kiali-2.18.0
+  clusterConfigOverrides:
+    - appVersion: 2.18.0
+      clusterSelector:
+        matchExpressions:
+          - key: kommander.d2iq.io/cluster-name
+            operator: In
+            values:
+              - workload02
+      configMapName: ''
+    - appVersion: 2.18.0
+      clusterSelector:
+        matchExpressions:
+          - key: kommander.d2iq.io/cluster-name
+            operator: In
+            values:
+              - workload01
+      configMapName: ''
+  clusterSelector:
+    matchExpressions:
+      - key: kommander.d2iq.io/cluster-name
+        operator: In
+        values:
+          - workload01
+          - workload02

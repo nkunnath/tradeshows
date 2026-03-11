@@ -1,0 +1,68 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ndk-workload01-config-overrides
+  namespace: kommander-default-workspace
+  labels:
+    kommander.d2iq.io/managed-by-kind: AppDeployment
+data:
+  values.yaml: |-
+    imageCredentials:
+      credentials:
+        registry: https://index.docker.io/v1/
+        username: 
+        password: 
+    tls:
+      server:
+        clusterName: workload01
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ndk-workload02-config-overrides
+  namespace: kommander-default-workspace
+  labels:
+    kommander.d2iq.io/managed-by-kind: AppDeployment
+data:
+  values.yaml: |-
+    imageCredentials:
+      credentials:
+        registry: https://index.docker.io/v1/
+        username: 
+        password: 
+    tls:
+      server:
+        clusterName: workload02
+---
+apiVersion: apps.kommander.d2iq.io/v1alpha3
+kind: AppDeployment
+metadata:
+  name: ndk
+  namespace: kommander-default-workspace
+spec:
+  appRef:
+    kind: App
+    name: ndk-2.0.0
+  clusterConfigOverrides:
+    - clusterSelector:
+        matchExpressions:
+          - key: kommander.d2iq.io/cluster-name
+            operator: In
+            values:
+              - workload01
+      configMapName: ndk-workload01-config-overrides
+    - clusterSelector:
+        matchExpressions:
+          - key: kommander.d2iq.io/cluster-name
+            operator: In
+            values:
+              - workload02
+      configMapName: ndk-workload02-config-overrides
+  clusterSelector:
+    matchExpressions:
+      - key: kommander.d2iq.io/cluster-name
+        operator: In
+        values:
+          - workload01
+          - workload02

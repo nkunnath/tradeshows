@@ -1,0 +1,22 @@
+### Apply in the NKP management cluster. This Project will create a namespace in the workload clusters.
+
+apiVersion: workspaces.kommander.mesosphere.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    kommander.mesosphere.io/description: >-
+      Online boutique is a web-based e-commerce app where users can browse
+      items, add them to the cart, and purchase them.
+    kommander.mesosphere.io/display-name: online-boutique
+  labels:
+    istio-injection: enabled
+  name: online-boutique
+  namespace: kommander-default-workspace
+spec:
+  namespaceName: online-boutique
+  placement:
+    clusters:
+      - name: workload01
+      - name: workload02
+  workspaceRef:
+    name: default-workspace

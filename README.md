@@ -1,2 +1,1 @@
-# tradeshows
-NKP cluster prep for tradeshows
+### NKP cluster prep for tradeshows

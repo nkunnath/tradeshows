@@ -1,0 +1,24 @@
+### Apply in the NKP management cluster. This GitOpsRepository will deploy the online boutique application to the workload clusters.
+
+apiVersion: dispatch.d2iq.io/v1alpha3
+kind: GitopsRepository
+metadata:
+  name: online-boutique
+  namespace: online-boutique
+gitRepository:
+  interval: 3m0s
+  ref:
+    branch: main
+  timeout: 1m0s
+  url: https://github.com/nutanixdev/nkp-microservices-demo.git
+kustomization:
+  force: false
+  interval: 6h0m0s
+  path: ./release/with-istio
+  prune: true
+  sourceRef:
+    apiVersion: source.toolkit.fluxcd.io/v1
+    kind: GitRepository
+    name: online-boutique
+    namespace: online-boutique
+  targetNamespace: online-boutique
