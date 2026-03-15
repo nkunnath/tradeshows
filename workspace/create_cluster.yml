@@ -1,0 +1,48 @@
+# Create a Workspace 'edge' from NKP console.
+
+nkp create cluster nutanix -c $MANAGED_ONE_CLUSTER_NAME \
+    --bootstrap-cluster-image $REGISTRY_MIRROR_URL/mesosphere/konvoy-bootstrap:v$NKP_VERSION \
+    --endpoint https://$NUTANIX_ENDPOINT:$NUTANIX_PORT \
+    --insecure \
+    --control-plane-endpoint-ip $MANAGED_ONE_CONTROL_PLANE_ENDPOINT_IP \
+    --kubernetes-service-load-balancer-ip-range $MANAGED_ONE_LB_IP_RANGE \
+    --control-plane-vm-image $NUTANIX_MACHINE_TEMPLATE_IMAGE_NAME \
+    --control-plane-prism-element-cluster $NUTANIX_PRISM_ELEMENT_CLUSTER_NAME \
+    --control-plane-subnets $NUTANIX_SUBNET_NAME \
+    --worker-vm-image $NUTANIX_MACHINE_TEMPLATE_IMAGE_NAME \
+    --worker-prism-element-cluster $NUTANIX_PRISM_ELEMENT_CLUSTER_NAME \
+    --worker-subnets $NUTANIX_SUBNET_NAME \
+    --csi-storage-container $NUTANIX_STORAGE_CONTAINER_NAME \
+    --registry-mirror-url https://$REGISTRY_MIRROR_URL \
+    --skip-preflight-checks=Registry \
+    --control-plane-replicas 1 \
+    --control-plane-memory 6 \
+    --worker-replicas 2 \
+    --worker-vcpus 4 \
+    --worker-memory 6 \
+    --namespace=edge
+
+---
+nkp create cluster nutanix -c $MANAGED_TWO_CLUSTER_NAME \
+    --bootstrap-cluster-image $REGISTRY_MIRROR_URL/mesosphere/konvoy-bootstrap:v$NKP_VERSION \
+    --endpoint https://$NUTANIX_ENDPOINT:$NUTANIX_PORT \
+    --insecure \
+    --control-plane-endpoint-ip $MANAGED_TWO_CONTROL_PLANE_ENDPOINT_IP \
+    --kubernetes-service-load-balancer-ip-range $MANAGED_TWO_LB_IP_RANGE \
+    --control-plane-vm-image $NUTANIX_MACHINE_TEMPLATE_IMAGE_NAME \
+    --control-plane-prism-element-cluster $NUTANIX_PRISM_ELEMENT_CLUSTER_NAME \
+    --control-plane-subnets $NUTANIX_SUBNET_NAME \
+    --worker-vm-image $NUTANIX_MACHINE_TEMPLATE_IMAGE_NAME \
+    --worker-prism-element-cluster $NUTANIX_PRISM_ELEMENT_CLUSTER_NAME \
+    --worker-subnets $NUTANIX_SUBNET_NAME \
+    --csi-storage-container $NUTANIX_STORAGE_CONTAINER_NAME \
+    --registry-mirror-url https://$REGISTRY_MIRROR_URL \
+    --skip-preflight-checks=Registry \
+    --control-plane-replicas 1 \
+    --control-plane-memory 6 \
+    --worker-replicas 2 \
+    --worker-vcpus 4 \
+    --worker-memory 6 \
+    --namespace=edge
+
+

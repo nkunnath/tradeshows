@@ -9,7 +9,7 @@ metadata:
       items, add them to the cart, and purchase them.
     kommander.mesosphere.io/display-name: online-boutique
   labels:
-    istio-injection: enabled
+    istio.io/rev: istio-helm
   name: online-boutique
   namespace: kommander-default-workspace
 spec:

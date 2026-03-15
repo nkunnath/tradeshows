@@ -1,4 +1,4 @@
-### Apply in the NKP management cluster. This GitOpsRepository will deploy the online boutique application to the workload clusters.
+### Apply in the NKP management cluster. This GitOpsRepository will deploy the online boutique application with Istio to the workload clusters.
 
 apiVersion: dispatch.d2iq.io/v1alpha3
 kind: GitopsRepository
