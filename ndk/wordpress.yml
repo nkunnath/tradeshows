@@ -159,23 +159,3 @@ spec:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
           claimName: wp-pv-claim
----
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: wordpress
-  namespace: wordpress
-spec:
-  ingressClassName: kommander-traefik
-  rules:
-    - host: wordpress.10.38.30.19.sslip.io  ### Update this host entry with the Ingress LB IP address of the workload cluster.
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: wordpress
-                port:
-                  number: 80
