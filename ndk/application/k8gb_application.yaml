@@ -9,10 +9,12 @@ metadata:
 spec:
  applicationSelector:
   resourceLabelSelectors:
-   - excludeResources: 
-     - group: k8gb.io
-       kind: Gslb
+   - includeResources: 
      - group: ""
-       kind: ConfigMap
+       kind: PersistentVolumeClaim
+     - group: apps
+       kind: Deployment
      - group: ""
-       kind: ServiceAccount
+       kind: Service
+     - group: ""
+       kind: Secret
