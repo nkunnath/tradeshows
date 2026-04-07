@@ -9,21 +9,9 @@ metadata:
 spec:
  applicationSelector:
   resourceLabelSelectors:
-   - excludeResources: 
-     - group: k8gb.io
-       kind: Gslb
+   - includeResources: 
      - group: ""
-       kind: ConfigMap
-     - group: ""
-       kind: ServiceAccount
-     - group: ""
-       kind: Secret
-     - group: "apps"
-       kind: Deployment
-     - group: ""
-       kind: Service
-     - group: "networking.k8s.io"
-       kind: Ingress
+       kind: PersistentVolumeClaim
 
 
     
