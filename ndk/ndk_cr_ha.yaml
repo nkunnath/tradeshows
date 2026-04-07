@@ -25,23 +25,23 @@ spec:
 apiVersion: scheduler.nutanix.com/v1alpha1
 kind: JobScheduler
 metadata:
-  name: daily-schedule
+  name: hourly-schedule
   namespace: wordpress
 spec:
-  daily: 
-    time: 01:00
+  interval:
+    minutes: 60
   timeZoneName: "America/Los_Angeles"
 
 ---
 apiVersion: dataservices.nutanix.com/v1alpha1
 kind: ProtectionPlan                                                           
 metadata:                                                                      
-  name: daily-protection-plan
+  name: hourly-protection-plan
   namespace: wordpress
 spec:
-  scheduleName: daily-schedule
+  scheduleName: hourly-schedule
   retentionPolicy:
-    retentionCount: 14
+    retentionCount: 12
   replicationConfigs:
     - replicationTargetName: replication-target-wordpress
 
@@ -54,4 +54,4 @@ metadata:
   namespace: wordpress
 spec:
   applicationName: wordpress
-  protectionPlanNames: ["daily-protection-plan"]
+  protectionPlanNames: ["hourly-protection-plan"]
