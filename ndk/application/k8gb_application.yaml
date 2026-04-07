@@ -1,0 +1,18 @@
+### NDK handles failover of application and storage. 
+### GitOps synchronization for only networking. Create Kustomization for path: "../networking/" 
+
+apiVersion: dataservices.nutanix.com/v1alpha1
+kind: Application
+metadata:
+ name: wordpress
+ namespace: wordpress
+spec:
+ applicationSelector:
+  resourceLabelSelectors:
+   - excludeResources: 
+     - group: k8gb.io
+       kind: Gslb
+     - group: ""
+       kind: ConfigMap
+     - group: ""
+       kind: ServiceAccount

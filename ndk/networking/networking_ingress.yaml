@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wordpress
+  namespace: wordpress
+  annotations:
+    cert-manager.io/cluster-issuer: "selfsigned-issuer"
+spec:
+  ingressClassName: kommander-traefik
+  tls:
+    - hosts:
+        - wordpress.gslb.thencpnutanix.com
+      secretName: wordpress-tls-cert # cert-manager will create this secret
+  rules:
+    - host: wordpress.gslb.thencpnutanix.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wordpress
+                port:
+                  number: 80
+                  
+
+---
+apiVersion: k8gb.io/v1beta1
+kind: Gslb
+metadata:
+  name: wordpress-gslb
+  namespace: wordpress
+spec:
+  resourceRef:
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    name: wordpress
+  strategy:
+    dnsTtlSeconds: 60
+    primaryGeoTag: k8s-primary
+    type: failover
