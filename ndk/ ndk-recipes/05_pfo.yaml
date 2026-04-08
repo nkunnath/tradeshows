@@ -15,7 +15,8 @@ data:
           "source_namespace": "wordpress",
           "target_namespace": "wordpress",
           "replication_target_name": "replication-target-wordpress",
-          "app_name": "wordpress"
+          "app_name": "wordpress",
+          "create_if_not_exists": true
         }
       ]
     }
