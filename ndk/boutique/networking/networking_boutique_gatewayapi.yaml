@@ -1,0 +1,75 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: boutique-cert
+  namespace: boutique
+spec:
+  secretName: boutique-tls-cert
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - boutique.gslb.thencpnutanix.com
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: boutique-gateway
+  namespace: boutique
+  annotations:
+    traefik.io/router.entrypoints: web, websecure
+spec:
+  gatewayClassName: traefik
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 8000
+      allowedRoutes:
+        namespaces:
+          from: Same
+    - name: https
+      protocol: HTTPS
+      port: 8443 # Default Traefik websecure container port
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: boutique-tls-cert # Ensure this secret exists
+      allowedRoutes:
+        namespaces:
+          from: Same
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: boutique-route
+  namespace: boutique
+spec:
+  parentRefs:
+    - name: boutique-gateway
+  hostnames:
+    - "boutique.gslb.thencpnutanix.com"
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: frontend
+          port: 80
+
+---
+apiVersion: k8gb.io/v1beta1
+kind: Gslb
+metadata:
+  name: boutique-gslb
+  namespace: boutique
+spec:
+  resourceRef:
+    apiVersion: gateway.networking.k8s.io/v1
+    kind: HTTPRoute
+    name: boutique-route # Pointing to the new Route
+  strategy:
+    dnsTtlSeconds: 60
+    primaryGeoTag: k8s-primary
+    type: failover
