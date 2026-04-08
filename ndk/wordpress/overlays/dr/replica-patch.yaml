@@ -5,3 +5,4 @@ metadata:
   namespace: wordpress
 spec:
   replicas: 2
+  
