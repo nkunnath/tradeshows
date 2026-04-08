@@ -5,4 +5,12 @@ metadata:
   namespace: wordpress
 spec:
   replicas: 2
-  
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-mysql
+  namespace: wordpress
+spec:
+  replicas: 1
