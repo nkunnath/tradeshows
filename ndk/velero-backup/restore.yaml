@@ -1,0 +1,18 @@
+# When you restore from a backup
+
+---
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  name: wordpress-restore
+  namespace: kommander
+spec:
+  backupName: wordpress-backup
+  # This ensures the 'wordpress' namespace is recreated and populated
+  includedNamespaces:
+    - wordpress
+  # restorePVs is true by default, but being explicit is safer
+  restorePVs: true
+  # This maps to your snapshotMoveData: true setting in the backup
+  # Velero will use the DataMover to pull data back from your S3 bucket
+  itemOperationTimeout: 1h
