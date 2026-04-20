@@ -38,7 +38,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: ./apps/boutique/base
+  path: ./applications/boutique/base
   prune: true
   sourceRef:
     kind: GitRepository
