@@ -37,6 +37,9 @@ metadata:
   name: wordpress-app
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: wordpress-gatewayapi
+    - name: wordpress-gslb
   interval: 10m
   path: ./applications/wordpress/overlays
   prune: true

@@ -37,6 +37,9 @@ metadata:
   name: boutique-app
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: boutique-gatewayapi
+    - name: boutique-gslb
   interval: 10m
   path: ./applications/boutique/overlays
   prune: true
