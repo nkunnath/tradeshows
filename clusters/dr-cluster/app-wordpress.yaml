@@ -10,7 +10,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: technote-repo
   postBuild:
     substituteFrom:
       - kind: ConfigMap
@@ -28,7 +28,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: technote-repo
 
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -42,7 +42,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: technote-repo
 
 
 
