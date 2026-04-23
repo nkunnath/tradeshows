@@ -6,6 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
+  retryInterval: 1m
   path: ./infrastructure/gateway_api/wordpress
   prune: true
   sourceRef:
@@ -24,6 +25,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
+  retryInterval: 1m
   path: ./infrastructure/gslb/wordpress
   prune: true
   sourceRef:
@@ -41,6 +43,7 @@ spec:
     - name: wordpress-gatewayapi
     - name: wordpress-gslb
   interval: 10m
+  retryInterval: 1m
   path: ./applications/wordpress/overlays
   prune: true
   sourceRef:

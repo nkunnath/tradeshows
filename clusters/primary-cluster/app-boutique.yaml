@@ -6,6 +6,7 @@
 #   namespace: flux-system
 # spec:
 #   interval: 10m
+#   retryInterval: 1m
 #   path: ./infrastructure/gateway_api/boutique
 #   prune: true
 #   sourceRef:
@@ -24,6 +25,7 @@
 #   namespace: flux-system
 # spec:
 #   interval: 10m
+#   retryInterval: 1m
 #   path: ./infrastructure/gslb/boutique
 #   prune: true
 #   sourceRef:
@@ -41,6 +43,7 @@
 #     - name: boutique-gatewayapi
 #     - name: boutique-gslb
 #   interval: 10m
+#   retryInterval: 1m
 #   path: ./applications/boutique/overlays
 #   prune: true
 #   sourceRef:
